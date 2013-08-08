@@ -26,7 +26,7 @@ class GTALK < Sensu::Handler
   end
 
   def action_to_string
-    @event['action'].eql?('resolve') ? "RESOLVED" : "ALERT"
+    @event['action'].eql?('resolve') ? 'RESOLVED' : 'ALERT'
   end
 
   def handle
@@ -40,15 +40,15 @@ class GTALK < Sensu::Handler
 
     begin
       timeout 10 do
-        puts "Connecting to jabber server.."
-        jabber = Jabber::Simple.new(username+'@gmail.com', password)
-        puts "Connected."
-        jabber.deliver(to_username+"@gmail.com", "#{body}")
+        puts 'Connecting to jabber server..'
+        jabber = Jabber::Simple.new(username + '@gmail.com', password)
+        puts 'Connected.'
+        jabber.deliver(to_username + '@gmail.com', "#{body}")
         sleep(10)
         puts "Alert successfully sent to #{to_username}"
       end
     rescue Timeout::Error
-      puts "timed out while attempting to sent message"
+      puts 'timed out while attempting to sent message'
     end
   end
 end
